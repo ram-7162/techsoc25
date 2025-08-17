@@ -1,0 +1,87 @@
+#include<iostream>
+using namespace std;
+bool isUppercase(char ch){
+if(ch>='a' && ch<='z'){
+   return false;
+}else{
+    return true;
+}
+return true;
+}
+void encoded(string st , int n){
+        for(int i=0 ;i<(int)st.length(); i++){
+        char ch = st[i];
+         if(ch<'a' && ch>'Z' ){
+          cout<<ch;
+        }else if(ch<'A'){
+          cout<<ch;
+        }else if(ch>'z'){
+          cout<<ch;
+        }
+     else if(isUppercase(ch)){
+      if(ch == ' '){
+        cout<<' ';
+      }else{
+        ch+=n;
+         if(int(ch)>90 ){
+          int i = int(ch)-91;
+          ch = 'A';
+          ch+=i;
+        }
+        cout<<ch;
+      }
+    }else{
+       ch+=n;
+         if(int(ch)>122 ){
+          int i = int(ch)-123;
+          ch = 'a';
+          ch+=i;
+        }
+        cout<<ch;
+    }
+  }
+}
+
+void decode(string st , int n){
+        for(int i=0 ;i<(int)st.length(); i++){
+        char ch = st[i];
+        if(ch<'a' && ch>'Z' ){
+          cout<<ch;
+        }else if(ch<'A'){
+          cout<<ch;
+        }else if(ch>'z'){
+          cout<<ch;
+        }
+       else if(isUppercase(ch)){
+        ch-=n;
+        if(ch<'A' ){
+          int i =64- int(ch);
+          ch = 'Z';
+          ch-=i;
+        }
+        cout<<ch;
+    }else{
+      ch-=n;
+         if(ch<'a' ){
+          int i = 97-int(ch);
+          ch = 'z';
+          ch-=i;
+        }
+        cout<<ch;
+    }
+  }
+}
+int main(){
+    string st = "HeLLo, 345 WoRLD !";
+    int n; 
+    cout<<"select the shift for encode : ";
+    cin>>n;
+    cout<<"Encoded is : ";
+    encoded(st , n);
+     cout<<endl;
+      int m; 
+    cout<<"select the shift for decode : ";
+    cin>>m;
+    cout<<"decode is : ";
+    decode(st , m);
+}
