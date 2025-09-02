@@ -58,22 +58,30 @@ string decryptCaesar(const string& cipherText, int shift){
        else if(isUppercase(ch)){
         ch-=shift;
         if(ch<'A' ){
+            if(int(ch)!=64){
            int i =26 - (int(ch)+14)%26 ;
           ch = 'Z';
           ch-=i;
+        }else{
+            ch = 'Z';
         }
+    }
        decryptedText += ch; 
     }else{
       ch-=shift;
          if(ch<'a' ){
+            if(int(ch)!=96){
           int i = 26 - (int(ch)+8)%26;
           ch = 'z';
           ch-=(i);
+        }else{
+ ch = 'z';
         }
         decryptedText += ch; 
     }
-  }
+}
   return decryptedText;
+}
 }
 
 int main() {
