@@ -89,3 +89,4 @@ int main(){
     cin>>m;
     cout<<"decode is : ";
     decode(st , m);
+}
