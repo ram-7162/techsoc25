@@ -1,5 +1,3 @@
-#include<iostream>
-using namespace std;
 bool isUppercase(char ch){
 if(ch>='a' && ch<='z'){
    return false;
@@ -9,6 +7,7 @@ if(ch>='a' && ch<='z'){
 return true;
 }
 void encoded(string st , int n){
+        n%=26;
         for(int i=0 ;i<(int)st.length(); i++){
         char ch = st[i];
          if(ch<'a' && ch>'Z' ){
@@ -19,12 +18,10 @@ void encoded(string st , int n){
           cout<<ch;
         }
      else if(isUppercase(ch)){
-      if(ch == ' '){
-        cout<<' ';
-      }else{
+      {
         ch+=n;
          if(int(ch)>90 ){
-          int i = int(ch)-91;
+          int i = (int(ch)+13)%26;
           ch = 'A';
           ch+=i;
         }
@@ -33,7 +30,7 @@ void encoded(string st , int n){
     }else{
        ch+=n;
          if(int(ch)>122 ){
-          int i = int(ch)-123;
+       int i = (int(ch)+7)%26;
           ch = 'a';
           ch+=i;
         }
@@ -55,24 +52,32 @@ void decode(string st , int n){
        else if(isUppercase(ch)){
         ch-=n;
         if(ch<'A' ){
-          int i =64- int(ch);
+         if(int(ch)!=64){
+         int i =26 - (int(ch)+14)%26 ;
           ch = 'Z';
-          ch-=i;
+          ch-=(i);
+        }else{
+ch = 'Z';
         }
+      }
         cout<<ch;
     }else{
       ch-=n;
          if(ch<'a' ){
-          int i = 97-int(ch);
+        if(int(ch)!=96){
+        int i = 26 - (int(ch)+8)%26;
           ch = 'z';
-          ch-=i;
+          ch-=(i);
+        }else{
+          ch = 'z';
         }
+      }
         cout<<ch;
     }
   }
 }
 int main(){
-    string st = "HeLLo, 345 WoRLD !";
+    string st = "xyz";
     int n; 
     cout<<"select the shift for encode : ";
     cin>>n;
@@ -84,4 +89,3 @@ int main(){
     cin>>m;
     cout<<"decode is : ";
     decode(st , m);
-}
